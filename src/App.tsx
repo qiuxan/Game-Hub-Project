@@ -1,7 +1,7 @@
 import ListGroup from "./components/ListGroup";
 import Alert from "./components/Alert";
 function App() {
-  let items = ["NY", "SF", "TK", "LD", "PR", "CH"];
+  let items = ["NY", "SF", "TK", "LD", "PR"];
 
   let handleSelected = (item: string) => {
     console.log("from app.tsx", item);

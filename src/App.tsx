@@ -1,4 +1,5 @@
 import ListGroup from "./components/ListGroup";
+import Alert from "./components/Alert";
 function App() {
   let items = ["NY", "SF", "TK", "LD", "PR", "CH"];
 
@@ -8,6 +9,9 @@ function App() {
 
   return (
     <div>
+      <Alert>
+        Hello <span>world</span>
+      </Alert>
       <ListGroup items={items} heading="List" handleSelected={handleSelected} />
     </div>
   );

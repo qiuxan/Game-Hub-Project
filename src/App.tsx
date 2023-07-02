@@ -1,7 +1,7 @@
 import ListGroup from "./components/ListGroup";
 import Alert from "./components/Alert";
 import Button from "./components/Button";
-import { MouseEvent } from "react";
+import { MouseEvent, useState } from "react";
 function App() {
   let items = ["NY", "SF", "TK", "LD", "PR"];
 
@@ -9,19 +9,34 @@ function App() {
     console.log("from app.tsx", item);
   };
 
-  let handleButtonClick = () => {};
+  const [alertVisible, setAlertVisible] = useState(false);
+
+  let handleButtonClick = () => {
+    setAlertVisible(false);
+  };
 
   return (
     <div>
+      {alertVisible && (
+        <Alert
+          onClose={() => {
+            setAlertVisible(false);
+          }}
+        >
+          My <span>Alert</span>
+        </Alert>
+      )}
+
       <Button
         color="secondary"
-        onClick={(event: MouseEvent) => console.log(event)}
+        onClick={(event: MouseEvent) => {
+          setAlertVisible(true);
+          console.log(event);
+        }}
       >
         Button text
       </Button>
-      <Alert>
-        Hello <span>world</span>
-      </Alert>
+
       <ListGroup items={items} heading="List" handleSelected={handleSelected} />
     </div>
   );

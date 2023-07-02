@@ -1,15 +1,22 @@
+import { useState } from "react";
 import { BsHeart, BsHeartFill } from "react-icons/bs";
 interface Props {
-  liked: boolean;
   likeClicked: () => void;
 }
-function LikeButton({ liked, likeClicked }: Props) {
+
+function LikeButton({ likeClicked }: Props) {
+  const [status, setStatus] = useState(false);
+
+  const toggle = () => {
+    setStatus(!status);
+    likeClicked();
+  };
   return (
     <>
-      {liked ? (
-        <BsHeartFill color="red" onClick={likeClicked} />
+      {status ? (
+        <BsHeartFill color="red" onClick={toggle} />
       ) : (
-        <BsHeart onClick={likeClicked} />
+        <BsHeart onClick={toggle} />
       )}
     </>
   );

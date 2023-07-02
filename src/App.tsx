@@ -15,15 +15,17 @@ function App() {
 
   const [alertVisible, setAlertVisible] = useState(false);
 
-  const [liked, setLiked] = useState(false);
-
   let handleButtonClick = () => {
     setAlertVisible(false);
   };
 
   return (
     <div>
-      <LikeButton liked={liked} likeClicked={() => setLiked(!liked)} />
+      <LikeButton
+        likeClicked={() => {
+          console.log("like clicked");
+        }}
+      />
       <BsCash color="green" size={40} />
       {alertVisible && (
         <Alert

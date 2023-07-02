@@ -2,6 +2,8 @@ import ListGroup from "./components/ListGroup";
 import Alert from "./components/Alert";
 import Button from "./components/Button";
 import { MouseEvent, useState } from "react";
+import { BsCash } from "react-icons/bs";
+
 // import "./App.css";
 function App() {
   let items = ["NY", "SF", "TK", "LD", "PR"];
@@ -18,6 +20,7 @@ function App() {
 
   return (
     <div>
+      <BsCash color="green" size={40} />
       {alertVisible && (
         <Alert
           onClose={() => {

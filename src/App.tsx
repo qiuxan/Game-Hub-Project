@@ -32,7 +32,7 @@ function App() {
       )}
 
       <Button
-        color="secondary"
+        color="primary"
         onClick={(event: MouseEvent) => {
           setAlertVisible(true);
           console.log(event);

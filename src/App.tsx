@@ -1,8 +1,9 @@
 import ListGroup from "./components/ListGroup";
 import Alert from "./components/Alert";
 import Button from "./components/Button";
+import LikeButton from "./components/LikeButton";
 import { MouseEvent, useState } from "react";
-import { BsCash } from "react-icons/bs";
+import { BsCash, BsHeartFill, BsHeart } from "react-icons/bs";
 
 // import "./App.css";
 function App() {
@@ -14,12 +15,15 @@ function App() {
 
   const [alertVisible, setAlertVisible] = useState(false);
 
+  const [liked, sedLiked] = useState(false);
+
   let handleButtonClick = () => {
     setAlertVisible(false);
   };
 
   return (
     <div>
+      <LikeButton liked={liked} likeClicked={() => sedLiked(!liked)} />
       <BsCash color="green" size={40} />
       {alertVisible && (
         <Alert
@@ -30,7 +34,6 @@ function App() {
           My <span>Alert</span>
         </Alert>
       )}
-
       <Button
         color="primary"
         onClick={(event: MouseEvent) => {
@@ -40,7 +43,6 @@ function App() {
       >
         Button text
       </Button>
-
       <ListGroup items={items} heading="List" handleSelected={handleSelected} />
     </div>
   );

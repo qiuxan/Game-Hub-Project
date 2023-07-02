@@ -1,5 +1,6 @@
 import React, { ReactNode } from "react";
 import { MouseEvent } from "react";
+import style from "./Button.module.css";
 
 interface Props {
   children: ReactNode;
@@ -8,9 +9,14 @@ interface Props {
 }
 
 function Button({ children, color = "primary", onClick }: Props) {
+  console.log(color);
   return (
     <>
-      <button type="button" className={"btn btn-" + color} onClick={onClick}>
+      <button
+        type="button"
+        onClick={onClick}
+        className={[style["btn-" + color], style["btn"]].join(" ")}
+      >
         {children}
       </button>
     </>

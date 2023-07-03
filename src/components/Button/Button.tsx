@@ -9,7 +9,7 @@ interface Props {
 }
 
 function Button({ children, color = "primary", onClick }: Props) {
-  console.log(color);
+  // console.log(color);
   return (
     <>
       <button

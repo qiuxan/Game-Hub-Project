@@ -4,6 +4,7 @@ import Button from "./components/Button";
 import LikeButton from "./components/LikeButton";
 import NavBar from "./components/NavBar";
 import Cart from "./components/Cart";
+import ExpandableText from "./components/ExpandableText";
 import { MouseEvent, useState } from "react";
 import { BsCash, BsHeartFill, BsHeart } from "react-icons/bs";
 import produce from "immer";
@@ -85,6 +86,7 @@ function App() {
 
   return (
     <div>
+      <ExpandableText cutToNumber={30} />
       <div>
         <h3>Cart</h3>
         <ul>

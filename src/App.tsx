@@ -4,9 +4,27 @@ import Button from "./components/Button";
 import LikeButton from "./components/LikeButton";
 import { MouseEvent, useState } from "react";
 import { BsCash, BsHeartFill, BsHeart } from "react-icons/bs";
+import produce from "immer";
 
 // import "./App.css";
 function App() {
+  const [bugs, setBugs] = useState([
+    { id: 1, tiltle: "bug 1", fixed: false },
+    { id: 2, tiltle: "bug 2", fixed: false },
+  ]);
+
+  const handleClick = () => {
+    //old fasshion way
+    // setBugs(bugs.map((bug) => (bug.id == 1 ? { ...bug, fixed: true } : bug)));
+    //immer way
+    setBugs(
+      produce((draft) => {
+        const bug = draft.find((bug) => bug.id === 1);
+        if (bug) bug.fixed = true;
+      })
+    );
+  };
+
   let items = ["NY", "SF", "TK", "LD", "PR"];
 
   let handleSelected = (item: string) => {
@@ -21,6 +39,15 @@ function App() {
 
   return (
     <div>
+      {bugs.map((bug) => (
+        <p key={bug.id}>
+          {" "}
+          {bug.tiltle} {bug.fixed ? "Fixed" : "New"}
+        </p>
+      ))}
+
+      <button onClick={handleClick}>Fix bug 1</button>
+
       <LikeButton
         likeClicked={() => {
           console.log("like clicked");

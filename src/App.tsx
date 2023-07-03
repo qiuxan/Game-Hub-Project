@@ -10,6 +10,48 @@ import produce from "immer";
 
 // import "./App.css";
 function App() {
+  const [cart, setCart] = useState({
+    discount: 0.1,
+    items: [
+      {
+        id: 1,
+        title: "product 1 ",
+        quantity: 1,
+      },
+      {
+        id: 2,
+        title: "product 2 ",
+        quantity: 1,
+      },
+    ],
+  });
+
+  const addOneP1 = () => {
+    setCart({
+      ...cart,
+      items: cart.items.map((item) =>
+        item.id === 1 ? { ...item, quantity: item.quantity + 1 } : item
+      ),
+    });
+  };
+
+  const [game, setGame] = useState({
+    id: 1,
+    player: {
+      name: "John",
+      age: 13,
+    },
+  });
+
+  const [pizza, setPizza] = useState({
+    name: "Spicy pepperoni",
+    toppings: ["Mushroom"],
+  });
+
+  const handleAddCheese = () => {
+    setPizza({ ...pizza, toppings: [...pizza.toppings, "Cheese"] });
+  };
+
   const [cartItems, setCartItems] = useState(["product 1", "product 2"]);
 
   const [bugs, setBugs] = useState([
@@ -43,8 +85,42 @@ function App() {
 
   return (
     <div>
-      <NavBar cartItemsCount={cartItems.length} />
+      <div>
+        <h3>Cart</h3>
+        <ul>
+          {cart.items.map((item) => (
+            <li>
+              id: {item.id} title: {item.title} quantity : {item.quantity}
+            </li>
+          ))}
+        </ul>
+        <button onClick={addOneP1}> Add 1 to Prod 1</button>
+      </div>
+      <div>
+        <h3>Name: {pizza.name}</h3>
+        <p>Toppings: </p>
+        <ul>
+          {pizza.toppings.map((topping) => (
+            <li>{topping}</li>
+          ))}
+        </ul>
+        <button onClick={handleAddCheese}>Add Cheese</button>
+      </div>
+      <div>
+        <p>ID: {game.id} </p>
+        <p>Player: {game.player.name}</p>
+        <p>Age: {game.player.age}</p>
+      </div>
 
+      <button
+        onClick={() => {
+          setGame({ ...game, player: { ...game.player, name: "Bob" } });
+        }}
+      >
+        Change Name to Bob
+      </button>
+
+      <NavBar cartItemsCount={cartItems.length} />
       <Cart
         cartItems={cartItems}
         clearCart={() => {

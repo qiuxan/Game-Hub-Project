@@ -2,12 +2,16 @@ import ListGroup from "./components/ListGroup";
 import Alert from "./components/Alert";
 import Button from "./components/Button";
 import LikeButton from "./components/LikeButton";
+import NavBar from "./components/NavBar";
+import Cart from "./components/Cart";
 import { MouseEvent, useState } from "react";
 import { BsCash, BsHeartFill, BsHeart } from "react-icons/bs";
 import produce from "immer";
 
 // import "./App.css";
 function App() {
+  const [cartItems, setCartItems] = useState(["product 1", "product 2"]);
+
   const [bugs, setBugs] = useState([
     { id: 1, tiltle: "bug 1", fixed: false },
     { id: 2, tiltle: "bug 2", fixed: false },
@@ -39,6 +43,15 @@ function App() {
 
   return (
     <div>
+      <NavBar cartItemsCount={cartItems.length} />
+
+      <Cart
+        cartItems={cartItems}
+        clearCart={() => {
+          setCartItems([]);
+        }}
+      />
+
       {bugs.map((bug) => (
         <p key={bug.id}>
           {" "}

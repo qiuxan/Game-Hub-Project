@@ -14,7 +14,7 @@ const ItemSelecter = ({ categories, setShowingCategory }: Props) => {
   };
 
   return (
-    <div>
+    <div className="mb-3">
       <select className="form-select" onChange={handleOptionChange}>
         <option>All</option>
         {categories.map((category) => (

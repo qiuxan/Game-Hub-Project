@@ -1,12 +1,19 @@
 import { useForm, FieldValues } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+
+interface Props {
+  categories: string[];
+}
+
 const schema = z.object({
-  name: z.string().min(3, { message: "name must be more than 3 characters" }),
-  age: z.number({ invalid_type_error: "age field is required" }).min(18),
+  description: z
+    .string()
+    .min(3, { message: "description must be more than 3 characters" }),
+  amount: z.number({ invalid_type_error: "amount field is required" }).min(18),
 });
 type FormData = z.infer<typeof schema>;
-function Form() {
+function Form({ categories }: Props) {
   const {
     register,
     handleSubmit,
@@ -21,32 +28,53 @@ function Form() {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="mb-3">
-        <label htmlFor="name" className="form-label">
-          Name
+        <label htmlFor="description" className="form-label">
+          Description
         </label>
         <input
-          {...register("name")}
-          id="name"
+          {...register("description")}
+          id="description"
           type="text"
           className="form-control"
         />
-        {errors.name && <p className="text-danger">{errors.name.message}</p>}
+        {errors.description && (
+          <p className="text-danger">{errors.description.message}</p>
+        )}
       </div>
       <div className="mb-3">
-        <label htmlFor="age" className="form-label">
-          Age
+        <label htmlFor="amount" className="form-label">
+          Amount
         </label>
         <input
-          {...register("age", { valueAsNumber: true })}
-          id="age"
+          {...register("amount", { valueAsNumber: true })}
+          id="amount"
           type="number"
           className="form-control"
         />
-        {errors.age && <p className="text-danger">{errors.age.message}</p>}
+        {errors.amount && (
+          <p className="text-danger">{errors.amount.message}</p>
+        )}
       </div>
-      <button disabled={!isValid} type="submit" className="btn btn-primary">
-        Submit
-      </button>
+      <div className="mb-3">
+        <label htmlFor="categories" className="form-label">
+          Categories
+        </label>
+        <select
+          id="categories"
+          className="form-select"
+          onChange={() => console.log("changed")}
+        >
+          <option>---</option>
+          {categories.map((category) => (
+            <option key={category}>{category}</option>
+          ))}
+        </select>
+      </div>
+      <div className="mb-3">
+        <button disabled={!isValid} type="submit" className="btn btn-primary">
+          Submit
+        </button>
+      </div>
     </form>
   );
 }

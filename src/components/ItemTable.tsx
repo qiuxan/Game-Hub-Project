@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import ItemSelecter from "./ItemSelecter";
 
-const ItemTable = () => {
-  const [items, setItems] = useState([
-      { description: "milk", amount: 5, category: "groceries" },
-      { description: "egg", amount: 5, category: "groceries" },
-      { description: "electricity", amount: 100, category: "utilities" },
-      { description: "milk", amount: 5, category: "groceries" },
-    ]),
-    [showingCategory, setShowingCategory] = useState("All");
+interface Props {
+  items: any[];
+}
+
+const ItemTable = ({ items }: Props) => {
+  const [showingCategory, setShowingCategory] = useState("All");
 
   const categories = [...new Set(items.map((item) => item.category))];
 

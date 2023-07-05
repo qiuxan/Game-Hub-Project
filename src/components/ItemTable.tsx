@@ -3,9 +3,10 @@ import ItemSelecter from "./ItemSelecter";
 
 interface Props {
   items: any[];
+  handleDelete: (index: number) => void;
 }
 
-const ItemTable = ({ items }: Props) => {
+const ItemTable = ({ items, handleDelete }: Props) => {
   const [showingCategory, setShowingCategory] = useState("All");
 
   const categories = [...new Set(items.map((item) => item.category))];
@@ -33,7 +34,13 @@ const ItemTable = ({ items }: Props) => {
                   <td>$ {item.amount}</td>
                   <td>{item.category}</td>
                   <td>
-                    <button className="btn btn-danger" id={"delete-" + index}>
+                    <button
+                      className="btn btn-danger"
+                      id={"delete-" + index}
+                      onClick={() => {
+                        handleDelete(index);
+                      }}
+                    >
                       Delete
                     </button>
                   </td>
@@ -47,7 +54,13 @@ const ItemTable = ({ items }: Props) => {
                     <td>$ {item.amount}</td>
                     <td>{item.category}</td>
                     <td>
-                      <button className="btn btn-danger" id={"delete-" + index}>
+                      <button
+                        className="btn btn-danger"
+                        id={"delete-" + index}
+                        onClick={() => {
+                          handleDelete(index);
+                        }}
+                      >
                         Delete
                       </button>
                     </td>

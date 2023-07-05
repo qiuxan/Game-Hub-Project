@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 interface Props {
   categories: string[];
+  handleSubmitted: (data: any) => void;
 }
 
 const schema = z.object({
@@ -11,9 +12,10 @@ const schema = z.object({
     .string()
     .min(3, { message: "description must be more than 3 characters" }),
   amount: z.number({ invalid_type_error: "amount field is required" }).min(18),
+  category: z.string().min(4, { message: "selet a category" }),
 });
 type FormData = z.infer<typeof schema>;
-function Form({ categories }: Props) {
+function Form({ categories, handleSubmitted }: Props) {
   const {
     register,
     handleSubmit,
@@ -22,7 +24,8 @@ function Form({ categories }: Props) {
   //   console.log(errors);
 
   const onSubmit = (data: FieldValues) => {
-    console.log(data);
+    handleSubmitted(data);
+    // console.log(data);
   };
 
   return (
@@ -60,6 +63,7 @@ function Form({ categories }: Props) {
           Categories
         </label>
         <select
+          {...register("category")}
           id="categories"
           className="form-select"
           onChange={() => console.log("changed")}
@@ -69,9 +73,12 @@ function Form({ categories }: Props) {
             <option key={category}>{category}</option>
           ))}
         </select>
+        {errors.category && (
+          <p className="text-danger">{errors.category.message}</p>
+        )}
       </div>
       <div className="mb-3">
-        <button disabled={!isValid} type="submit" className="btn btn-primary">
+        <button type="submit" className="btn btn-primary">
           Submit
         </button>
       </div>

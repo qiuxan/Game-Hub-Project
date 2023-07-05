@@ -11,10 +11,29 @@ function App() {
   ]);
   const categories = [...new Set(items.map((item) => item.category))];
 
+  const handleSubmitted = (data: any) => {
+    console.log("in app.js", { data });
+    setItems([
+      ...items,
+      {
+        description: data.description,
+        amount: data.amount,
+        category: data.category,
+      },
+    ]);
+  };
+
+  const handleDelete = (index: number) => {
+    console.log(index);
+    const itemsCopy = [...items];
+    itemsCopy.splice(index, 1);
+    setItems(itemsCopy);
+  };
+
   return (
     <div>
-      <Form categories={categories} />
-      <ItemTable items={items} />
+      <Form categories={categories} handleSubmitted={handleSubmitted} />
+      <ItemTable items={items} handleDelete={handleDelete} />
     </div>
   );
 }

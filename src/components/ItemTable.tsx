@@ -67,6 +67,14 @@ const ItemTable = ({ items, handleDelete }: Props) => {
                   </tr>
                 ))}
         </tbody>
+        <tfoot>
+          <tr>
+            <td>Total : </td>
+            <td>${items.reduce((acc, item) => item.amount + acc, 0)}</td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tfoot>
       </table>
     </>
   );

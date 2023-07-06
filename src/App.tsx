@@ -6,7 +6,7 @@ interface User {
   name: string;
 }
 function App() {
-  const [users, setUnsers] = useState<User[]>([]);
+  const [users, setUsers] = useState<User[]>([]);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
@@ -15,7 +15,7 @@ function App() {
     //     const res = await axios.get<User[]>(
     //       "https://jsonplaceholder.typicode.com/users"
     //     );
-    //     setUnsers(res.data);
+    //     setUsers(res.data);
     //   } catch (err) {
     //     setError((err as AxiosError).message);
     //   }
@@ -30,7 +30,7 @@ function App() {
         signal: controller.signal,
       })
       .then((res) => {
-        setUnsers(res.data);
+        setUsers(res.data);
         setIsLoading(false);
       })
       .catch((err) => {
@@ -41,14 +41,33 @@ function App() {
 
     return () => controller.abort();
   }, []);
+  const deleteUser = (user: User) => {
+    const originalUser = [...users];
+    setUsers(users.filter((u) => u.id !== user.id));
+    axios
+      .delete("https://jsonplaceholder.typicode.com/users/" + user.id)
+      .catch((err) => {
+        setError(err.message);
+        setUsers(originalUser);
+      });
+  };
   return (
     <>
       {error && <p className="text-danger">{error}</p>}
       {isLoading && <div className="spinner-border"></div>}
-      <ul>
+      <ul className="list-group">
         {users.map((user) => (
-          <li key={user.id}>
-            ID: {user.id} Name: {user.name}
+          <li
+            key={user.id}
+            className="list-group-item d-flex justify-content-between"
+          >
+            Name: {user.name}
+            <button
+              className="btn btn-outline-danger"
+              onClick={() => deleteUser(user)}
+            >
+              Delete
+            </button>
           </li>
         ))}
       </ul>

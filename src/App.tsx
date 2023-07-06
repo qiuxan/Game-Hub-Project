@@ -1,40 +1,20 @@
-import { useCallback, useState } from "react";
-import Form from "./components/Form";
-import ItemTable from "./components/ItemTable";
+import React, { useState } from "react";
+import ProductList from "./components/ProductList";
 
 function App() {
-  const [items, setItems] = useState([
-    { description: "milk", amount: 5, category: "groceries" },
-    { description: "egg", amount: 5, category: "groceries" },
-    { description: "electricity", amount: 100, category: "utilities" },
-    { description: "milk", amount: 5, category: "groceries" },
-  ]);
-  const categories = [...new Set(items.map((item) => item.category))];
-
-  const handleSubmitted = (data: any) => {
-    console.log("in app.js", { data });
-    setItems([
-      ...items,
-      {
-        description: data.description,
-        amount: data.amount,
-        category: data.category,
-      },
-    ]);
-  };
-
-  const handleDelete = (index: number) => {
-    console.log(index);
-    const itemsCopy = [...items];
-    itemsCopy.splice(index, 1);
-    setItems(itemsCopy);
-  };
-
+  const [category, setCategory] = useState("");
   return (
-    <div>
-      <Form categories={categories} handleSubmitted={handleSubmitted} />
-      <ItemTable items={items} handleDelete={handleDelete} />
-    </div>
+    <>
+      <select
+        className="form-select"
+        onChange={(event) => setCategory(event.target.value)}
+      >
+        <option value=""></option>
+        <option value="Clothing">Clothing</option>
+        <option value="Household">Household</option>
+      </select>
+      <ProductList category={category} />
+    </>
   );
 }
 

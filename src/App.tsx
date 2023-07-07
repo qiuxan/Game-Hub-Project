@@ -52,6 +52,24 @@ function App() {
       });
   };
 
+  const updateUser = (user: User) => {
+    const updatedUser = { ...user, name: user.name + "!" };
+    // console.log(updatedUser);
+    const originalUser = [...users];
+
+    axios
+      .patch(
+        "https://jsonplaceholder.typicode.com/users/" + user.id,
+        updatedUser
+      )
+      .then(({ data: updatedUser }) =>
+        setUsers(users.map((u) => (u.id === user.id ? updatedUser : u)))
+      )
+      .catch((err) => {
+        setError(err.message);
+        setUsers(originalUser);
+      });
+  };
   const addUser = () => {
     const originalUser = [...users];
     const newUser = { id: users.length + 1, name: "newUser" };
@@ -73,6 +91,7 @@ function App() {
       <button className="btn btn-primary mb-3" onClick={addUser}>
         Add
       </button>
+
       <ul className="list-group">
         {users.map((user) => (
           <li
@@ -80,12 +99,21 @@ function App() {
             className="list-group-item d-flex justify-content-between"
           >
             Name: {user.name}
-            <button
-              className="btn btn-outline-danger"
-              onClick={() => deleteUser(user)}
-            >
-              Delete
-            </button>
+            <div>
+              <button
+                className="btn btn-outline-secondary mx-1"
+                onClick={() => updateUser(user)}
+              >
+                Update
+              </button>
+
+              <button
+                className="btn btn-outline-danger"
+                onClick={() => deleteUser(user)}
+              >
+                Delete
+              </button>
+            </div>
           </li>
         ))}
       </ul>

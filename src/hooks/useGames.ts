@@ -3,12 +3,8 @@ import { GameQuery } from "../App";
 import apiClients from "../services/api-clients";
 import { FetchResponse } from "../services/api-clients";
 import { Genre } from "./useGenres";
+import { Platform } from "./usePlatform";
 
-export interface Platform {
-  id: number;
-  name: string;
-  slug: string;
-}
 export interface Game {
   background_image: string;
   id: number;

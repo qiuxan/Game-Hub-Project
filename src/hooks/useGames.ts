@@ -16,7 +16,7 @@ export interface Game {
   rating: number;
 }
 
-const apiClient = new APIClient("/games");
+const apiClient = new APIClient<Game>("/games");
 
 const useGames = (gameQuery: GameQuery) =>
   useQuery<FetchResponse<Game>, Error>({
@@ -29,8 +29,7 @@ const useGames = (gameQuery: GameQuery) =>
           ordering: gameQuery.sortOrder,
           search: gameQuery.searchText,
         },
-      }
-      ),
+      }),
   });
 
 export default useGames;

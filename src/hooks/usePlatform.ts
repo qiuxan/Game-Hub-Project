@@ -15,7 +15,7 @@ const usePlatForm = () =>
     queryKey: ["platforms"],
     queryFn: apiClient.getAll,
     staleTime: 24 * 60 * 60 * 100,
-    initialData: { count: platforms.length, results: platforms }, // remake the genre data to make it the same as FetchResponse<Platform>
+    initialData: { count: platforms.length, results: platforms, next: null }, // remake the genre data to make it the same as FetchResponse<Platform>
   });
 
 // const usePlatForm = () => useData<Platform>("/platforms/lists/parents");

@@ -3,7 +3,7 @@ import { GameQuery } from "../App";
 import APIClient from "../services/api-clients";
 import { FetchResponse } from "../services/api-clients";
 import { Genre } from "./useGenres";
-import { Platform } from "./usePlatform";
+import { Platform } from "./usePlatforms";
 
 export interface Game {
   background_image: string;

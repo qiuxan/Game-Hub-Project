@@ -15,7 +15,7 @@ const useGenres = () =>
     queryKey: ["genres"],
     queryFn: apiClient.getAll,
     staleTime: 24 * 60 * 60 * 1000, //24 hrs, coz the genre hardly changes,
-    initialData: { count: genres.length, results: genres, next: null }, // remake the genre data to make it the same as FetchResponse<Genre> we get from  ` queryFn `
+    initialData: genres,
   });
 // useData<Genre>("/genres");
 

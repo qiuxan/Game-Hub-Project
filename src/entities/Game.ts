@@ -1,7 +1,9 @@
 import { Genre } from "./Genre";
 import { Platform } from "./Platform";
+import { Publisher } from "./Publisher";
 
 export interface Game {
+  publishers: Publisher[];
   background_image: string;
   slug: string;
   id: number;
